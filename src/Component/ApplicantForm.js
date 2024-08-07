@@ -186,6 +186,7 @@ const ApplicantForm = () => {
     { value: "lk", label: "Sri Lanka", code: "+94" },
     { value: "in", label: "India", code: "+91" },
   ];
+  
   const disabledDate = (current) => {
     // Can not select days after today
     const today = moment().startOf("day");
@@ -578,7 +579,7 @@ const ApplicantForm = () => {
                                   name="phoneNo"
                                   value={applicantData.phoneNo}
                                   onChange={handlePhoneNumberChange}
-                                  placeholder="E.g. 94771473328"
+                                  placeholder="E.g. 771473328"
                                   style={{ width: "70%" }}
                                 />
                               </Input.Group>

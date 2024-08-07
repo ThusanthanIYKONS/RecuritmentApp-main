@@ -399,7 +399,7 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
             <Form.Item
               label={
                 <span>
-                  preferred Contact Method
+                  Preferred Contact Method
                   <span className="required-asterisk">*</span>
                 </span>
               }
@@ -467,7 +467,7 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
             <Form.Item
               label={
                 <span>
-                  Catergory
+                  Category
                   <span className="required-asterisk">*</span>
                 </span>
               }
