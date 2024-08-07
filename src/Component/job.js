@@ -41,7 +41,7 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
     educationDTO: null,
     departmentUserDTO: null,
   });
-  
+
   const [departmentUserDTO, setDepartmentUserDTO] = useState({
     departmentID: 0,
   });
@@ -107,7 +107,9 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
         console.error("Error response status:", error.response.status);
         console.error("Error response headers:", error.response.headers);
         notification.error({
-          description: `Server Error: ${error.response.status} - ${error.response.data.message || error.response.statusText}`,
+          description: `Server Error: ${error.response.status} - ${
+            error.response.data.message || error.response.statusText
+          }`,
         });
       } else if (error.request) {
         console.error("Error request data:", error.request);
@@ -117,7 +119,7 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
       console.error("Error config:", error.config);
     }
   };
-  
+
   const stepTitles = [
     "Personal Details",
     "Experience Details",
@@ -195,7 +197,7 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
 
   return (
     <div className="container" style={{ marginTop: "60px" }}>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[24]}>
         <Col span={12}>
           <Form.Item
             label={
@@ -222,7 +224,6 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
               onChange={(value) =>
                 handleChangeEducationDTO("currentStatus", value)
               }
-              
               placeholder="Current Status"
             >
               <Option value="Student">Student</Option>
@@ -256,7 +257,6 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
               onChange={(value) =>
                 handleChangeEducationDTO("qualification", value)
               }
-              
               placeholder="Qualification"
             >
               <Option value="Undergraduate">Undergraduate</Option>
@@ -290,7 +290,6 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
               name="fieldOfStudy"
               value={departmentUserDTO.departmentID}
               onChange={(value) => handleChangeDepartment(value)}
-              
               placeholder="Field of Study"
             >
               {departmentOptions.map((department) => (
@@ -335,7 +334,6 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
               onChange={(e) =>
                 handleChangeEducationDTO("instituteName", e.target.value)
               }
-              
               placeholder="University"
             />
           </Form.Item>
@@ -371,7 +369,6 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
               onChange={(e) =>
                 handleChangeEducationDTO("yearAttained", e.target.value)
               }
-              
               placeholder="Year Attained"
             />
           </Form.Item>
@@ -406,7 +403,6 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
                   e.target.value
                 )
               }
-              
               placeholder="additional Qualification"
             />
           </Form.Item>
@@ -435,7 +431,6 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
               onChange={(e) =>
                 handleChangeExperienceData("motherLanguage", e.target.value)
               }
-              
               placeholder="Mother Language"
             />
           </Form.Item>
@@ -463,10 +458,11 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
               id="additionalKnownLanguages"
               name="additionalKnownLanguages"
               mode="multiple"
-              
               value={additionalKnownLanguages.additionalKnownLanguages}
               onChange={(value) => handleChangeAdditionalKnownLanguages(value)}
               placeholder="additional Languages"
+              showSearch
+              optionFilterProp="children"
             >
               {additionalLanguageOptions.map((skill) => (
                 <Option key={skill.skillid} value={skill.skillid}>
@@ -499,8 +495,9 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
               mode="multiple"
               value={softSkill.softSkills}
               onChange={(value) => handleChangeSoftSkills(value)}
-              
               placeholder="SoftSkills"
+              showSearch
+              optionFilterProp="children"
             >
               {softSkillOptions.map((skill) => (
                 <Option key={skill.skillid} value={skill.skillid}>
@@ -513,41 +510,40 @@ const Job = ({ handleNext, handleBack, currentStep }) => {
           </Form.Item>
         </Col>
 
-        
-<Col span={12}>
-  <Form.Item
-    label={
-      <span>
-        Hard Skills
-        <span className="required-asterisk">*</span>
-      </span>
-    }
-    name="hardSkills"
-    rules={[
-      { required: true, message: "Please select the hard skills." },
-    ]}
-    required={false}
-    labelCol={{ span: 24 }}
-    wrapperCol={{ span: 24 }}
-  >
-    <Select
-      id="hardSkills"
-      name="hardSkills"
-      mode="multiple"
-      value={hardSkill.hardSkills}
-      onChange={(value) => handleChangeHardSkills(value)}
-      placeholder="Select hard skills"
-      showSearch
-      optionFilterProp="children"
-    >
-      {hardSkillOptions.map((skill) => (
-        <Option key={skill.skillid} value={skill.skillid}>
-          {skill.skillName}
-        </Option>
-      ))}
-    </Select>
-  </Form.Item>
-</Col>
+        <Col span={12}>
+          <Form.Item
+            label={
+              <span>
+                Hard Skills
+                <span className="required-asterisk">*</span>
+              </span>
+            }
+            name="hardSkills"
+            rules={[
+              { required: true, message: "Please select the hard skills." },
+            ]}
+            required={false}
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+          >
+            <Select
+              id="hardSkills"
+              name="hardSkills"
+              mode="multiple"
+              value={hardSkill.hardSkills}
+              onChange={(value) => handleChangeHardSkills(value)}
+              placeholder="Select hard skills"
+              showSearch
+              optionFilterProp="children"
+            >
+              {hardSkillOptions.map((skill) => (
+                <Option key={skill.skillid} value={skill.skillid}>
+                  {skill.skillName}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+        </Col>
 
         <div
           className="col-md-12"

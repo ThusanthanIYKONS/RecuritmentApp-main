@@ -74,7 +74,7 @@ const ApplicantForm = () => {
 
   const location = useLocation();
   const jwtToken = location.state ? location.state.token : null;
- 
+
   const handleChange = (name, value) => {
     setValidationErrors((prevErrors) => ({
       ...prevErrors,
@@ -137,12 +137,11 @@ const ApplicantForm = () => {
       return;
     }
 
-    try{
+    try {
       await form.validateFields();
-    }
-    catch(error){
+    } catch (error) {
       notification.error({
-        description: error
+        description: error,
       });
       return;
     }
@@ -174,52 +173,51 @@ const ApplicantForm = () => {
     "Acknowledgement",
   ];
   const countryOptions = [
-    { value: 'us', label: 'United States', code: '+1' },
-    { value: 'ca', label: 'Canada', code: '+1' },
-    { value: 'gb', label: 'United Kingdom', code: '+44' },
-    { value: 'au', label: 'Australia', code: '+61' },
-    { value: 'de', label: 'Germany', code: '+49' },
-    { value: 'fr', label: 'France', code: '+33' },
-    { value: 'it', label: 'Italy', code: '+39' },
-    { value: 'es', label: 'Spain', code: '+34' },
-    { value: 'mx', label: 'Mexico', code: '+52' },
-    { value: 'jp', label: 'Japan', code: '+81' },
-    { value: 'lk', label: 'Sri Lanka', code: '+94' },
-    { value: 'in', label: 'India', code: '+91' },
+    { value: "us", label: "United States", code: "+1" },
+    { value: "ca", label: "Canada", code: "+1" },
+    { value: "gb", label: "United Kingdom", code: "+44" },
+    { value: "au", label: "Australia", code: "+61" },
+    { value: "de", label: "Germany", code: "+49" },
+    { value: "fr", label: "France", code: "+33" },
+    { value: "it", label: "Italy", code: "+39" },
+    { value: "es", label: "Spain", code: "+34" },
+    { value: "mx", label: "Mexico", code: "+52" },
+    { value: "jp", label: "Japan", code: "+81" },
+    { value: "lk", label: "Sri Lanka", code: "+94" },
+    { value: "in", label: "India", code: "+91" },
   ];
   const disabledDate = (current) => {
     // Can not select days after today
     const today = moment().startOf("day");
-    
+
     // Calculate the minimum and maximum dates
-    const minDate = today.clone().subtract(120, 'years'); // 120 years ago
-    const maxDate = today.clone().subtract(0, 'years'); // Today
-    
+    const minDate = today.clone().subtract(120, "years"); // 120 years ago
+    const maxDate = today.clone().subtract(0, "years"); // Today
+
     return current && (current > maxDate || current < minDate);
   };
-  
-  
+
   const handleCountryCodeChange = (value) => {
-    handleChange('countryCode', value);
+    handleChange("countryCode", value);
   };
 
   const handlePhoneNumberChange = (e) => {
-    handleChange('phoneNo', e.target.value);
+    handleChange("phoneNo", e.target.value);
   };
 
   const validatePhoneNumber = (_, value) => {
     const { countryCode } = applicantData;
     if (!value) {
-      return Promise.reject('Please enter your phone number.');
+      return Promise.reject("Please enter your phone number.");
     }
     if (!countryCode) {
-      return Promise.reject('Please select a country code.');
+      return Promise.reject("Please select a country code.");
     }
     // Combine country code with phone number
     const fullPhoneNumber = `${countryCode}${value}`;
     // Example validation: ensure it starts with a `+` and contains only digits
     if (!/^\+\d{10,15}$/.test(fullPhoneNumber)) {
-      return Promise.reject('Phone number is not valid.');
+      return Promise.reject("Phone number is not valid.");
     }
     return Promise.resolve();
   };
@@ -266,18 +264,19 @@ const ApplicantForm = () => {
                   style={imageStyle1}
                 />
 
-<ul className="applicant-list">
-  <li className="li">
-    Make your resume public to be visible to Hiring Employees.
-  </li>
-  <li className="li">
-    Speed up the application process with quick apply. You can apply to jobs with just one click.
-  </li>
-  <li className="li">
-    See similar job titles and skills to help you make your next move.
-  </li>
-</ul>
-
+                <ul className="applicant-list">
+                  <li className="li">
+                    Make your resume public to be visible to Hiring Employees.
+                  </li>
+                  <li className="li">
+                    Speed up the application process with quick apply. You can
+                    apply to jobs with just one click.
+                  </li>
+                  <li className="li">
+                    See similar job titles and skills to help you make your next
+                    move.
+                  </li>
+                </ul>
               </MDBCol>
               <MDBCol
                 md="6"
@@ -300,43 +299,44 @@ const ApplicantForm = () => {
                     {currentStep === 0 && (
                       <div className="container" style={{ marginTop: "30px" }}>
                         <Row gutter={[16]}>
-                        <Col span={12}>
-  <Form.Item
-    label={
-      <span>
-        Title
-        <span className="required-asterisk">*</span>
-      </span>
-    }
-    name="title"
-    rules={[
-      {
-       
-        message: "Please select a title.",
-      },
-    ]}
-    labelCol={{ span: 24 }}
-    wrapperCol={{ span: 24 }}
-  >
-    <Select
-      value={applicantData.title}
-      onChange={(value) =>
-        handleChange("title", value)
-      }
-      placeholder="Title"
-      style={{ width: "100%" }}
-      showSearch
-      optionFilterProp="children"
-      filterOption={(input, option) =>
-        option.children.toLowerCase().includes(input.toLowerCase())
-      }
-    >
-      <Option value="Mr">Mr</Option>
-      <Option value="Mrs">Mrs</Option>
-      <Option value="Ms">Ms</Option>
-    </Select>
-  </Form.Item>
-</Col>
+                          <Col span={12}>
+                            <Form.Item
+                              label={
+                                <span>
+                                  Title
+                                  <span className="required-asterisk">*</span>
+                                </span>
+                              }
+                              name="title"
+                              rules={[
+                                {
+                                  message: "Please select a title.",
+                                },
+                              ]}
+                              labelCol={{ span: 24 }}
+                              wrapperCol={{ span: 24 }}
+                            >
+                              <Select
+                                value={applicantData.title}
+                                onChange={(value) =>
+                                  handleChange("title", value)
+                                }
+                                placeholder="Title"
+                                style={{ width: "100%" }}
+                                showSearch
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                  option.children
+                                    .toLowerCase()
+                                    .includes(input.toLowerCase())
+                                }
+                              >
+                                <Option value="Mr">Mr</Option>
+                                <Option value="Mrs">Mrs</Option>
+                                <Option value="Ms">Ms</Option>
+                              </Select>
+                            </Form.Item>
+                          </Col>
                           <Col span={12}>
                             <Form.Item
                               label={
@@ -501,138 +501,146 @@ const ApplicantForm = () => {
                             </Form.Item>
                           </Col>
                           <Col span={12}>
-      <Form.Item
-        label={
-          <span>
-            DOB
-            <span className="required-asterisk">*</span>
-          </span>
-        }
-        name="dob"
-        rules={[
-          {
-            required: true,
-            message: "Please select your date of birth.",
-          },
-        ]}
-        required={false}
-        labelCol={{ span: 24 }}
-        wrapperCol={{ span: 24 }}
-      >
-        <DatePicker
-          id="dob"
-          name="dob"
-          selected={selectedDate}
-          disabledDate={disabledDate}
-          onChange={handleDateChange}
-          dateFormat="MM/dd/yyyy"
-          placeholderText="Select Date of Birth"
-          style={{ width: "100%" }}
-        />
-        {validationErrors.dob && (
-          <span style={{ color: "red" }}>
-            {validationErrors.dob}
-          </span>
-        )}
-      </Form.Item>
-    </Col>
+                            <Form.Item
+                              label={
+                                <span>
+                                  DOB
+                                  <span className="required-asterisk">*</span>
+                                </span>
+                              }
+                              name="dob"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Please select your date of birth.",
+                                },
+                              ]}
+                              required={false}
+                              labelCol={{ span: 24 }}
+                              wrapperCol={{ span: 24 }}
+                            >
+                              <DatePicker
+                                id="dob"
+                                name="dob"
+                                selected={selectedDate}
+                                disabledDate={disabledDate}
+                                onChange={handleDateChange}
+                                dateFormat="MM/dd/yyyy"
+                                placeholderText="Select Date of Birth"
+                                style={{ width: "100%" }}
+                              />
+                              {validationErrors.dob && (
+                                <span style={{ color: "red" }}>
+                                  {validationErrors.dob}
+                                </span>
+                              )}
+                            </Form.Item>
+                          </Col>
                           <Col span={12}>
-      <Form.Item
-        label={
-          <span>
-            Phone Number
-            <span className="required-asterisk">*</span>
-          </span>
-        }
-        name="phoneNo"
-        rules={[validatePhoneNumber]}
-        required={false}
-        labelCol={{ span: 24 }}
-        wrapperCol={{ span: 24 }}
-      >
-        <Input.Group compact>
-          <Select
-            showSearch
-            defaultValue="+94" // Default country code, can be adjusted
-            style={{ width: '30%' }}
-            onChange={handleCountryCodeChange}
-            filterOption={(input, option) =>
-              option.children.toString().toLowerCase().includes(input.toLowerCase())
-            }
-          >
-            {countryOptions.map((country) => (
-              <Option key={country.value} value={country.code}>
-                {country.code} {country.label}
-              </Option>
-            ))}
-          </Select>
-          <Input
-            type="text"
-            id="phoneNo"
-            name="phoneNo"
-            value={applicantData.phoneNo}
-            onChange={handlePhoneNumberChange}
-            placeholder="E.g. 94771473328"
-            style={{ width: '70%' }}
-          />
-        </Input.Group>
-        {validationErrors.phoneNo && (
-          <span style={{ color: 'red' }}>
-            {validationErrors.phoneNo}
-          </span>
-        )}
-      </Form.Item>
-    </Col>
-    
-                          <Col span={12}>
-  <Form.Item
-    label={
-      <span>
-        Country
-        <span className="required-asterisk">*</span>
-      </span>
-    }
-    name="country"
-    rules={[
-      {
-       
-        
-         
-          message:
-            "Only letters (a-z, A-Z) are allowed.",
-        
-      },
+                            <Form.Item
+                              label={
+                                <span>
+                                  Phone Number
+                                  <span className="required-asterisk">*</span>
+                                </span>
+                              }
+                              name="phoneNo"
+                              rules={[validatePhoneNumber]}
+                              required={false}
+                              labelCol={{ span: 24 }}
+                              wrapperCol={{ span: 24 }}
+                            >
+                              <Input.Group compact>
+                                <Select
+                                  showSearch
+                                  defaultValue="+94" // Default country code, can be adjusted
+                                  style={{ width: "30%" }}
+                                  onChange={handleCountryCodeChange}
+                                  filterOption={(input, option) =>
+                                    option.children
+                                      .toString()
+                                      .toLowerCase()
+                                      .includes(input.toLowerCase())
+                                  }
+                                >
+                                  {countryOptions.map((country) => (
+                                    <Option
+                                      key={country.value}
+                                      value={country.code}
+                                    >
+                                      {country.code} {country.label}
+                                    </Option>
+                                  ))}
+                                </Select>
+                                <Input
+                                  type="text"
+                                  id="phoneNo"
+                                  name="phoneNo"
+                                  value={applicantData.phoneNo}
+                                  onChange={handlePhoneNumberChange}
+                                  placeholder="E.g. 94771473328"
+                                  style={{ width: "70%" }}
+                                />
+                              </Input.Group>
+                              {validationErrors.phoneNo && (
+                                <span style={{ color: "red" }}>
+                                  {validationErrors.phoneNo}
+                                </span>
+                              )}
+                            </Form.Item>
+                          </Col>
 
-    ]}
-    labelCol={{ span: 24 }}
-    wrapperCol={{ span: 24 }}
-  >
-    <Select
-      id="country"
-      name="country"
-      value={applicantData.country}
-      onChange={(value) => handleChange("country", value)}
-      placeholder="Select a country"
-      style={{ width: "100%" }}
-      showSearch
-      optionFilterProp="children"
-      filterOption={(input, option) =>
-        option.children.toLowerCase().includes(input.toLowerCase())
-      }
-    >
-      {countryOptions.map((country) => (
-        <Option key={country.value} value={country.value}>
-          {country.label}
-        </Option>
-      ))}
-    </Select>
-    {validationErrors.country && (
-      <span style={{ color: "red" }}>
-        {validationErrors.country}
-      </span>
-    )}
-  </Form.Item>
-</Col>
+                          <Col span={12}>
+                            <Form.Item
+                              label={
+                                <span>
+                                  Country
+                                  <span className="required-asterisk">*</span>
+                                </span>
+                              }
+                              name="country"
+                              rules={[
+                                {
+                                  message:
+                                    "Only letters (a-z, A-Z) are allowed.",
+                                },
+                              ]}
+                              labelCol={{ span: 24 }}
+                              wrapperCol={{ span: 24 }}
+                            >
+                              <Select
+                                id="country"
+                                name="country"
+                                value={applicantData.country}
+                                onChange={(value) =>
+                                  handleChange("country", value)
+                                }
+                                placeholder="Select a country"
+                                style={{ width: "100%" }}
+                                showSearch
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                  option.children
+                                    .toLowerCase()
+                                    .includes(input.toLowerCase())
+                                }
+                              >
+                                {countryOptions.map((country) => (
+                                  <Option
+                                    key={country.value}
+                                    value={country.value}
+                                  >
+                                    {country.label}
+                                  </Option>
+                                ))}
+                              </Select>
+                              {validationErrors.country && (
+                                <span style={{ color: "red" }}>
+                                  {validationErrors.country}
+                                </span>
+                              )}
+                            </Form.Item>
+                          </Col>
                           <Col span={12}>
                             <Form.Item
                               label={
@@ -905,7 +913,6 @@ const ApplicantForm = () => {
                         handleNext={handleNext}
                         handleBack={handleBack}
                         currentStep={currentStep}
-                        
                       />
                     )}
                     {currentStep === 2 && (

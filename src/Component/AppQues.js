@@ -191,7 +191,7 @@ const AppQues = ({ handleNext, handleBack, currentStep }) => {
   return (
     <Form>
       <div className="container" style={{ marginTop: "90px" }}>
-        <Row gutter={[24, 24]}>
+        <Row gutter={[24]}>
           <Col span={12}>
             <Form.Item
               label={
